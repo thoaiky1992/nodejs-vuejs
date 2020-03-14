@@ -1,6 +1,5 @@
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
   	entry: './vue.js',
   	output: {
@@ -8,32 +7,32 @@ module.exports = {
     	filename: 'main.js'
   	},
   	module: {
-	   rules: [
-		    {
-		      	test: /\.vue$/,
-		      	loader: "vue-loader",
-		      	exclude: /node_modules/,
-		      	query: {
-                    presets: ['@babel/preset-env']
-                }
-		    },
-		    {
-		      	test: /\.(scss|css)$/,
-		      	use: ["vue-style-loader", "css-loader", "sass-loader"]
-		    },
-		    {
-		      	test: /\.js$/,
-		      	loader: "babel-loader",
-		      	exclude: /node_modules/
-		    }
-	   	]
+   		rules: [
+      		{
+        		test: /\.vue$/,
+        		loader: 'vue-loader'
+      		},
+	      	// this will apply to both plain `.js` files
+	      	// AND `<script>` blocks in `.vue` files
+	      	{
+        		test: /\.js$/,
+        		loader: 'babel-loader'
+        	}
+      		,
+      		// this will apply to both plain `.css` files
+      		// AND `<style>` blocks in `.vue` files
+      		{
+        		test: /\.css$/,
+        		use: [
+          			'vue-style-loader',
+          			'css-loader'
+        		]
+      		}
+    	]
   	},
-  	resolve: {
-   		alias: {
-    		vue$: "vue/dist/vue.esm.js"
-		},
-   		extensions: ["*", ".js", ".vue", ".json"]
-  	},
-  	plugins: [VueLoaderPlugin(),new CopyPlugin([{ from: './' }])],
+  	plugins: [
+    	// make sure to include the plugin for the magic
+    	new VueLoaderPlugin()
+  	]
   
 }
