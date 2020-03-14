@@ -1,14 +1,19 @@
 <template>
  	<div>
   		<h1>
-   			Hello World
+   			{{ name }}
   		</h1>
  	</div>
 </template>
 
 <script>
 	export default {
-	 	name: "Home",
+	 	name: "App",
+	 	data(){
+	 		return{
+	 			name : 'Ky Smile'
+	 		}
+	 	}
 	};
 </script>
 <style scoped>
