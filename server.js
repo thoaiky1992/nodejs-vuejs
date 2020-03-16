@@ -11,7 +11,6 @@ app.set('view engine','html')
 app.set('views','./');
 
 app.use(express.static('./public'));
-
 app.get('*',(req,res) => {
 	let title = "nodejs-vuejs";
 	res.render('index',{title});

@@ -1,17 +1,47 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="no-js " lang="en">
+
+<!-- Mirrored from www.wrraptheme.com/templates/compass/html/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 01:30:06 GMT -->
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>  <%= title%> </title>
-	<link rel="stylesheet" href="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+    <title>Kết Nối Bạn Bè</title>
+    <!-- Favicon-->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/authentication.css">
+    <link rel="stylesheet" href="assets/css/color_skins.css">
 </head>
-<body>
-	<h1><%= title%> </h1>
-	<div id="app">
-		
-	</div>
-	<script src="main.js"></script>
+
+<body class="theme-cyan authentication sidebar-collapse">
+<!-- Navbar -->
+    <div id="app">
+        <router-view></router-view>
+    </div>
+<!-- End Navbar -->
+
+
+<!-- Jquery Core Js -->
+<script src="assets/bundles/libscripts.bundle.js"></script>
+<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+<script src="main.js"></script>
+<script>
+   $(".navbar-toggler").on('click',function() {
+    $("html").toggleClass("nav-open");
+});
+//=============================================================================
+$('.form-control').on("focus", function() {
+    $(this).parent('.input-group').addClass("input-group-focus");
+}).on("blur", function() {
+    $(this).parent(".input-group").removeClass("input-group-focus");
+});
+</script>
 </body>
 
+<!-- Mirrored from www.wrraptheme.com/templates/compass/html/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 01:30:07 GMT -->
 </html>
