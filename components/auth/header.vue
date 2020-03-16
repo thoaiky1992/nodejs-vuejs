@@ -2,7 +2,7 @@
 	<nav class="navbar navbar-expand-lg fixed-top navbar-transparent">
 	    <div class="container">        
 	        <div class="navbar-translate n_logo">
-	            <button class="navbar-toggler" type="button">
+	            <button class="navbar-toggler" type="button" @click="toogleNav">
 	                <span class="navbar-toggler-bar bar1"></span>
 	                <span class="navbar-toggler-bar bar2"></span>
 	                <span class="navbar-toggler-bar bar3"></span>
@@ -30,8 +30,18 @@
 	                </li>                
 	                <li class="nav-item">
 	                    <!-- <a class="nav-link btn btn-primary btn-round" href="sign-up.html">Đăng kí</a> -->
-						<router-link class="nav-link btn btn-primary btn-round" to="/register">Đăng kí</router-link>
-						<router-link class="nav-link btn btn-success btn-round" to="/">Đăng nhập</router-link>
+						<a 
+							class="nav-link btn btn-primary btn-round" 
+							@click="register"
+						>
+							Đăng kí
+						</a>
+						<a
+							class="nav-link btn btn-success btn-round" 
+							@click="login"
+						>
+							Đăng nhập
+						</a>
 	                </li>
 	            </ul>
 	        </div>
@@ -45,6 +55,30 @@
 </style>
 <script>
 	export default {
-		
+		methods : {
+			toogleNav(){
+				console.log('toogle nav');
+				$("html").toggleClass("nav-open");
+			},
+			login(){
+				if(this.$router.currentRoute.path == '/'){
+					return $("html").toggleClass("nav-open");
+				}
+				$("html").toggleClass("nav-open");
+				setTimeout(() => {
+					this.$router.push('/');
+				}, 500);
+			},
+			register(){
+				if(this.$router.currentRoute.path == '/register'){
+					return $("html").toggleClass("nav-open");
+				}
+				$("html").toggleClass("nav-open");
+				setTimeout(() => {
+					this.$router.push('/register');
+				}, 500);
+			}
+
+		}
 	}
 </script>
