@@ -62,21 +62,31 @@
 			},
 			login(){
 				if(this.$router.currentRoute.path == '/'){
-					return $("html").toggleClass("nav-open");
+					$("html").toggleClass("nav-open")
+					return;
 				}
-				$("html").toggleClass("nav-open");
-				setTimeout(() => {
-					this.$router.push('/');
-				}, 500);
+				if(window.innerWidth <= 768){
+					$("html").toggleClass("nav-open");
+					setTimeout(() => {
+						this.$router.push('/');
+					}, 500);
+					return;
+				}
+				this.$router.push('/');
 			},
 			register(){
 				if(this.$router.currentRoute.path == '/register'){
-					return $("html").toggleClass("nav-open");
+					$("html").toggleClass("nav-open");
+					return; 
 				}
-				$("html").toggleClass("nav-open");
-				setTimeout(() => {
-					this.$router.push('/register');
-				}, 500);
+				if(window.innerWidth <= 768){
+					$("html").toggleClass("nav-open");
+					setTimeout(() => {
+						this.$router.push('/register');
+					}, 500);
+					return;
+				}
+				this.$router.push('/register');
 			}
 
 		}
