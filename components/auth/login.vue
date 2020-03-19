@@ -35,9 +35,9 @@
 							</div>
 							<div class="footer text-center">
 								<a @click="login" class="btn l-cyan btn-round btn-lg btn-block waves-effect waves-light">Đăng nhập</a>
-								<a href="index-2.html" class="btn l-cyan btn-round btn-lg btn-block waves-effect waves-light"><i class="zmdi zmdi-facebook"></i> Đăng nhập với Facebook</a>
+								<a @click="test" class="btn l-cyan btn-round btn-lg btn-block waves-effect waves-light"><i class="zmdi zmdi-facebook"></i> Đăng nhập với Facebook</a>
 								<a href="index-2.html" class="btn l-cyan btn-round btn-lg btn-block waves-effect waves-light"><i class="zmdi zmdi-google"></i> Đăng nhập với Google</a>
-								<h6 class="m-t-20"><a @click="forgetPassword" class="link">Quên mật khẩu?</a></h6>
+								<h6 class="m-t-20"><a @click="getData" class="link">Quên mật khẩu?</a></h6>
 							</div>
 						</form>
 					</div>
@@ -62,7 +62,7 @@ export default {
 	},
 	methods : {
 		login(){
-			axios.post('http://localhost:5000/api/login',
+			axios.post('/api/login',
 				{ username : this.username}
 			).then(res => {
 				console.log(res.data)
@@ -71,14 +71,31 @@ export default {
 			).catch(err => console.log(err.response));
 
 		},
-		forgetPassword(){
-			this.$socket.emit('send-token',localStorage.getItem('token'))
+		test(){
+			let token = localStorage.getItem('token');
+			axios.post('/api/test',{},{
+				headers: { 
+					Authorization: "Bearer " + token ,
+				}
+			})
+			.then(res => console.log(res))
+			.catch(err => console.log(err))
+		},
+		getData(){
+			let token = localStorage.getItem('token');
+			axios.post('/api/getdata',{},{
+				headers: { 
+					Authorization: "Bearer " + token ,
+				}
+			})
+			.then(res => console.log(res))
+			.catch(err => console.log(err))
 		}
 	},
 	sockets: {
 		connect() {
 		console.log('socket connected. Authenticating...');
-		this.$socket.emit('authenticate', {token: localStorage.getItem('token')})
+		this.$socket.emit('authenticate', { token: localStorage.getItem('token') })
 		},
 
 		authenticated() {
@@ -86,12 +103,14 @@ export default {
 		},
 
 		unauthorized(msg) {
-		console.log('Socket unauthorized ' + JSON.stringify(msg.data))
-		throw new Error(msg.data.type)
+		console.log('Socket UnAuthorized ' + JSON.stringify(msg.data))
 		},
 
 		disconnect() {
 		console.log('disconnect');
+		},
+		test(data){
+			console.log(data)
 		}
 	}
 }

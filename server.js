@@ -6,7 +6,8 @@ require('dotenv').config();
 // socket.io JWT
 const io = require("socket.io")(server)
 const socketioJwt = require('socketio-jwt')
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
+const initRoutes = require('./routeServer');
 app.engine('html', require('ejs').renderFile);
 
 app.set('view engine','html')
@@ -14,10 +15,15 @@ app.set('view engine','html')
 app.set('views','./');
 app.use(express.json());
 app.use(express.static('./public'));
+
+
 app.get('*',(req,res) => {
 	let title = "nodejs-vuejs";
 	res.render('index',{title});
 })
+
+initRoutes(app);
+
 
 io.on('connection', (socket) => {
 	// console.log('Socket connected. Authenticating...')
@@ -26,14 +32,6 @@ io.on('connection', (socket) => {
 	timeout: 15000
 })).on('authenticated', (socket) => {
 	console.log(socket.request.user);
-	socket.on('send-token',data => {
-		console.log(jwt.verify(data,process.env.JWT_TOKEN_KEY));
-	})
 	// console.log(`Socket authenticated`)
 })
 
-app.post('/api/login',(req,res) => {
-	const token = jwt.sign({username : req.body.username},process.env.JWT_TOKEN_KEY ,{expiresIn: '365d'});
-	req.user = jwt.verify(token,process.env.JWT_TOKEN_KEY);
-	res.json(token);
-});
