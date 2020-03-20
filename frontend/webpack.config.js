@@ -7,7 +7,7 @@ module.exports = {
     	filename: 'main.js'
   	},
     devServer : {
-      port : 5000,
+      port : 3000,
       open : true
     },
   	module: {
