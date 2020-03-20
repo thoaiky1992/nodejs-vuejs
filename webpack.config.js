@@ -6,6 +6,10 @@ module.exports = {
     	path: path.resolve(__dirname, "./public"),
     	filename: 'main.js'
   	},
+    devServer : {
+      port : 5000,
+      open : true
+    },
   	module: {
    		rules: [
       		{
