@@ -71,31 +71,11 @@ export default {
 			).catch(err => console.log(err.response));
 
 		},
-		test(){
-			let token = localStorage.getItem('token');
-			axios.post('/api/test',{},{
-				headers: { 
-					Authorization: "Bearer " + token ,
-				}
-			})
-			.then(res => console.log(res))
-			.catch(err => console.log(err))
-		},
-		getData(){
-			let token = localStorage.getItem('token');
-			axios.post('/api/getdata',{},{
-				headers: { 
-					Authorization: "Bearer " + token ,
-				}
-			})
-			.then(res => console.log(res.data))
-			.catch(err => console.log(err))
-		}
 	},
 	sockets: {
 		connect() {
-		console.log('socket connected. Authenticating...');
-		this.$socket.emit('authenticate', { token: localStorage.getItem('token') })
+			console.log('socket connected. Authenticating...');
+			this.$socket.emit('authenticate', { token: localStorage.getItem('token') })
 		},
 
 		authenticated() {

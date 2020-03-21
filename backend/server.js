@@ -4,7 +4,7 @@ const server = require('http').createServer(app);
 const io = require("socket.io")(server);
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-const initRoutes = require('./routeServer');
+const initRoutes = require('./routes/routeServer');
 const initSocketIo = require('./socketio/index');
 require('dotenv').config();
 

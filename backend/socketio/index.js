@@ -8,7 +8,8 @@ let initSocketIo = (io) => {
 		secret: process.env.JWT_TOKEN_KEY,
 		timeout: 15000
 	})).on('authenticated', (socket) => {
-		console.log(socket.request.user);
+		console.log('user : ');
+		console.log(socket.decoded_token);
 		// console.log(`Socket authenticated`)
 	})
 }

@@ -1,6 +1,6 @@
 let db = require('../connectDB/index');
 
-const TABLE_NAME = 'Users';
+const TABLE_NAME = 'users';
 
 class User {
 	constructor(object){
@@ -21,17 +21,17 @@ class User {
 	}
 	save(){
 		return new Promise((resolve,reject) => {
-			db.query("Insert into users(name,email,password,address,created_at,updated_at,deleted_at) values(?,?,?,?,?,?,?)",
+			db.query(`Insert into ${TABLE_NAME} (name,email,password,address,created_at,updated_at,deleted_at) values(?,?,?,?,?,?,?)`,
 				[this.name,this.email,this.password,this.address,this.created_at,this.updated_at,this.deleted_at],(err,data)=>{
 				if(err) return reject(err)
 				resolve(data);
 			});
 		})
 	}
-	static getUserById(id){
+	static getUserByEmail(email){
 		return new Promise((resolve,reject) => {
-			db.query(`select * from ${TABLE_NAME } where id = ?`,
-				[id],(err,results, fields)=>{
+			db.query(`select * from ${TABLE_NAME } where email = ?`,
+				[email],(err,results, fields)=>{
 				if(err) return reject(err)
 				resolve(results);
 			});
