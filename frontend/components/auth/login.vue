@@ -35,9 +35,9 @@
 							</div>
 							<div class="footer text-center">
 								<a @click="login" class="btn l-cyan btn-round btn-lg btn-block waves-effect waves-light">Đăng nhập</a>
-								<a @click="test" class="btn l-cyan btn-round btn-lg btn-block waves-effect waves-light"><i class="zmdi zmdi-facebook"></i> Đăng nhập với Facebook</a>
+								<a class="btn l-cyan btn-round btn-lg btn-block waves-effect waves-light"><i class="zmdi zmdi-facebook"></i> Đăng nhập với Facebook</a>
 								<a href="index-2.html" class="btn l-cyan btn-round btn-lg btn-block waves-effect waves-light"><i class="zmdi zmdi-google"></i> Đăng nhập với Google</a>
-								<h6 class="m-t-20"><a @click="getData" class="link">Quên mật khẩu?</a></h6>
+								<h6 class="m-t-20"><a class="link">Quên mật khẩu?</a></h6>
 							</div>
 						</form>
 					</div>
@@ -89,9 +89,6 @@ export default {
 		disconnect() {
 		console.log('disconnect');
 		},
-		test(data){
-			console.log(data)
-		}
 	}
 }
 </script>

@@ -14,6 +14,13 @@ const SocketInstance = new VueSocketIO({
 	connection: 'http://localhost:5000'
 });
 Vue.use(SocketInstance)
+
+import Vuesax from 'vuesax'
+
+import 'vuesax/dist/vuesax.css' //Vuesax styles
+Vue.use(Vuesax, {
+  // options here
+})
 new Vue({
  	el: "#app",
  	router,

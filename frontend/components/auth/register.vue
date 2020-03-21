@@ -2,14 +2,14 @@
     <div>
         <Header></Header>
         <div class="page-header">
-            <div class="page-header-image" style="background-image:url(assets/images/login.jpg)"></div>
+            <div class="page-header-image" style="background-image:url(public/assets/images/login.jpg)"></div>
             <div class="container">
                 <div class="col-md-12 content-center">
                     <div class="card-plain">
                         <form class="form" method="" action="#">
                             <div class="header">
                                 <div class="logo-container">
-                                    <img src="assets/images/logo.svg" alt="">
+                                    <img src="public/assets/images/logo.svg" alt="">
                                 </div>
                                 <h5>Sign Up</h5>
                             </div>
@@ -65,10 +65,16 @@ export default {
     },
     methods : {
         singUp(){
+            if(!$('#terms')[0].checked){
+                toastr.warning('Vui lòng check xác nhận tài khoản trước khi đăng kí','',{timeOut:5000});
+                return;
+            }
+            this.$vs.loading();
             axios.post('/api/register',{ name : this.name , email : this.email , password : this.password } )
             .then(res => {
-                console.log(res.data)
-                window.toastr.success(res.data.message,'',{timeOut:5000});
+                this.$vs.loading.close();
+                window.toastr.success(res.data.message,'',{timeOut:6000});
+                this.$router.push('/');
             })
             .catch(err => console.log(err));
         }
