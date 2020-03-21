@@ -15,19 +15,19 @@
                             </div>
                             <div class="content">                                                
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Enter User Name">
+                                    <input type="text" v-model="name" class="form-control" placeholder="Enter User Name">
                                     <span class="input-group-addon">
                                         <i class="zmdi zmdi-account-circle"></i>
                                     </span>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Enter Email">
+                                    <input type="email" v-model="email" class="form-control" placeholder="Enter Email">
                                     <span class="input-group-addon">
                                         <i class="zmdi zmdi-email"></i>
                                     </span>
                                 </div>
                                 <div class="input-group">
-                                    <input type="password" placeholder="Password" class="form-control" />
+                                    <input type="password" v-model="password" placeholder="Password" class="form-control" />
                                     <span class="input-group-addon">
                                         <i class="zmdi zmdi-lock"></i>
                                     </span>
@@ -40,7 +40,7 @@
                                     </label>
                                 </div>
                             <div class="footer text-center">
-                                <a href="index-2.html" class="btn l-cyan btn-round btn-lg btn-block waves-effect waves-light">SIGN UP</a>
+                                <a  class="btn l-cyan btn-round btn-lg btn-block waves-effect waves-light" @click="singUp">SIGN UP</a>
                                 <h6 class="m-t-20"><a class="link" href="sign-in.html">You already have a membership?</a></h6>
                             </div>
                         </form>
@@ -55,6 +55,23 @@
 import Header from './header.vue';
 import Footer from './footer.vue';
 export default {
-    components :  { Header,Footer }
+    components :  { Header,Footer },
+    data(){
+        return {
+            name : '',
+            email : '',
+            password : ''
+        }
+    },
+    methods : {
+        singUp(){
+            axios.post('/api/register',{ name : this.name , email : this.email , password : this.password } )
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => console.log(err));
+        }
+    }
+
 }
 </script>

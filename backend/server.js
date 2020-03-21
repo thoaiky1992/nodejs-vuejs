@@ -10,7 +10,7 @@ require('dotenv').config();
 
 server.listen(process.env.PORT);
 app.use(express.json());
-app.use(cors({origin: 'http://localhost:3000'}));
+app.use(cors({origin: process.env.ALLOW_ORIGIN_DOMAIN }));
 
 initRoutes(app);
 initSocketIo(io);
