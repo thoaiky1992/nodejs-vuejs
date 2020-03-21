@@ -5,6 +5,7 @@ import router from './routes';
 import App from './components/App.vue';
 import VueSocketIO from 'vue-socket.io';
 
+window.toastr = require('toastr');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.headers.common['Content-Type'] = 'application/json';
 window.axios.defaults.baseURL = 'http://localhost:5000';

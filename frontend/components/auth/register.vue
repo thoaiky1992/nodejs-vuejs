@@ -68,6 +68,7 @@ export default {
             axios.post('/api/register',{ name : this.name , email : this.email , password : this.password } )
             .then(res => {
                 console.log(res.data)
+                window.toastr.success(res.data.message,'',{timeOut:5000});
             })
             .catch(err => console.log(err));
         }
